@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cookbook</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div class="container">
+
+  <% unless flash[:notice].blank? %>
+    <p id="flash_notice"><%= flash[:notice] %></p>
+  <% end %>
+
+  <% unless flash[:alert].blank? %>
+    <p id="flash_alert"><%= flash[:alert] %></p>
+  <% end %>
+
+
+  <% if current_cook %>
+    Logged in as <%= current_cook.email %>
+    <%= link_to "Log out", logout_path %>
+  <% else %>
+
+    <%= link_to "Signup", signup_path %>
+    <%= link_to "Log in", login_path %>
+  <% end %>
+
+<%= yield %>
+
+</div>
+</body>
+</html>

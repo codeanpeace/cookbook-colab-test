@@ -1,0 +1,12 @@
+<h1>Recipes#edit</h1>
+<p>Find me in app/views/recipes/edit.html.erb</p>
+
+<%= form_for @recipe, :url => {:action => "update"} do |f| %>
+  <label>Name</label>
+  <%= f.text_field :name %><br>
+
+  <label>Content</label>
+  <%= f.text_area :content %><br>
+
+  <%= f.submit %>
+<% end %>

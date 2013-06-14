@@ -1,0 +1,29 @@
+<h1>Listing cooks</h1>
+
+<table>
+  <tr>
+    <th>First name</th>
+    <th>Last name</th>
+    <th>Bio</th>
+    <th>Age</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @cooks.each do |cook| %>
+  <tr>
+    <td><%= cook.first_name %></td>
+    <td><%= cook.last_name %></td>
+    <td><%= cook.bio %></td>
+    <td><%= cook.age %></td>
+    <td><%= link_to 'Show', cook %></td>
+    <td><%= link_to 'Edit', edit_cook_path(cook) %></td>
+    <td><%= link_to 'Destroy', cook, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Cook', new_cook_path %>
