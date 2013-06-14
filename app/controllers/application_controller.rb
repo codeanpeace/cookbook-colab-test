@@ -9,8 +9,7 @@ class ApplicationController < ActionController::Base
   def setup_twilio_client
     if @twilio_client.nil?
       @twilio_client = Twilio::REST::Client.new(
-        "gibberish",
-        "gibberish"
+        ENV["TWILIO_ID"], ENV["TWILIO_SECRET"]
       )
     end
   end
