@@ -9,25 +9,21 @@
 
 require "open-uri"
 
-@bsams_raw = Nokogiri::HTML(open("http://www.simplyrecipes.com/recipes/baked_salmon_with_avocado_mango_salsa/"))
-@bsams_name = @bsams_raw.css("h1.entry-title")[0].content
-@bsams_content = @bsams_raw.css(".recipe-description p")[0].content
-@bsams_recipe = Recipe.create(:name => @bsams_name, :content => @bsams_content)
+def pop_from_url(url)
+  @raw = Nokogiri::HTML(open(url))
+  @name = @raw.css("h1.entry-title")[0].content
+  @content = @raw.css(".recipe-description p")[0].content
+  @recipe = Recipe.create(:name => @name, :content => @content)
+end
 
-@mcs_raw = Nokogiri::HTML(open("http://www.simplyrecipes.com/recipes/mediterranean_chicken_salad/"))
-@mcs_name = @mcs_raw.css("h1.entry-title")[0].content
-@mcs_content = @mcs_raw.css(".recipe-description p")[0].content
-@mcs_recipe = Recipe.create(:name => @mcs_name, :content => @mcs_content)
+url_list = ["http://www.simplyrecipes.com/recipes/baked_salmon_with_avocado_mango_salsa/",
+  "http://www.simplyrecipes.com/recipes/mediterranean_chicken_salad/",
+  "http://www.simplyrecipes.com/recipes/shrimp_and_grits/",
+  "http://www.simplyrecipes.com/recipes/beef_brisket_pot_roast/"]
 
-@sg_raw = Nokogiri::HTML(open("http://www.simplyrecipes.com/recipes/shrimp_and_grits/"))
-@sg_name = @sg_raw.css("h1.entry-title")[0].content
-@sg_content = @sg_raw.css(".recipe-description p")[0].content
-@sg_recipe = Recipe.create(:name => @sg_name, :content => @sg_content)
-
-@bbpr_raw = Nokogiri::HTML(open("http://www.simplyrecipes.com/recipes/beef_brisket_pot_roast/"))
-@bbpr_name = @bbpr_raw.css("h1.entry-title")[0].content
-@bbpr_content = @bbpr_raw.css(".recipe-description p")[0].content
-@bbpr_recipe = Recipe.create(:name => @bbpr_name, :content => @bbpr_content)
+url_list.each do |url|
+  pop_from_url(url)
+end
 
 
 @twilio_client = Twilio::REST::Client.new(
